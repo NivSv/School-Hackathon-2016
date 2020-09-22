@@ -1,0 +1,54 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Top.master.cs" Inherits="MasterPage" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>
+        <asp:ContentPlaceHolder id="title" runat="server">
+        </asp:ContentPlaceHolder>
+    </title>
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body background="Images/cold.jpg" style="font-family: 'Arial Black'" >
+    <%
+        if (Request["Logout"] != null)
+        {
+            Session["login"] = "out";
+            Session["admin"] = "no";
+            Session["name"] = "";
+            Session["nameuser"] = "";
+            Response.Redirect("Login.aspx");
+        }
+    %>
+    <form id="form1" runat="server">
+    <div class="wrapper">
+        <center><img src="Images/TellUsLogo.png" style="height: 474px; width: 535px" /><br /></center>
+        <div class="menu">
+            <center>
+                <table>
+                    <tr>
+                        <td><a href="Home.aspx"><input type="button" name="Home"  value="Home" style="height: 55px; width: 260px; font-size: x-large; font-family: Algerian; color: #800000; background-color: #CC0000;"/></a></td>
+                        <td><input type="submit" name="Logout"  value="Logout" style="height: 55px; width: 260px; font-size: x-large; font-family: Algerian; color: #990000; background-color: #CC3300;"/></td>
+                        <%if((string)Session["admin"] == "yes")
+                          {
+                          %>
+                          <td><a href="UsersManager.aspx"><input type="button" name="Users Manager"  value="Users Manager" style="height: 55px; width: 260px; font-size: x-large; font-family: Algerian; color: #990000; background-color: #CC3300;"/></a></td>
+                          <td><a href="ShopsManager.aspx"><input type="button" name="Shops Manager"  value="Shops Manager" style="height: 55px; width: 260px; font-size: x-large; font-family: Algerian; color: #990000; background-color: #CC3300;"/></a></td>
+                          <td><a href="CreateShop.aspx"><input type="button" name="Create Shop"  value="Create Shop" style="height: 55px; width: 260px; font-size: x-large; font-family: Algerian; color: #990000; background-color: #CC3300;"/></a></td>
+                          <%
+                          }
+                        %>
+                    </tr>
+                </table>
+            </center>
+        </div>
+
+        <asp:ContentPlaceHolder id="body" runat="server">
+        
+        </asp:ContentPlaceHolder>
+    </div>
+    </form>
+</body>
+</html>
